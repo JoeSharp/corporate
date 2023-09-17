@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/init_project_table.yaml
