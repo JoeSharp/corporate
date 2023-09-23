@@ -16,3 +16,14 @@ services:
       MYSQL_DATABASE: timesheets
       MYSQL_USER: tsuser
       MYSQL_PASSWORD: the-password
+
+  auth:
+    image: quay.io/keycloak/keycloak:22.0.3
+    command: start-dev --import-realm
+    ports:
+      - "8081:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin-pw
+    volumes:
+      - ./auth/realm-export.json:/opt/keycloak/data/import/main-realm.json:ro

@@ -7,7 +7,11 @@ spring:
     username: tsuser
     password: the-password
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri:  http://localhost:8081/realms/ratracejoe
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
