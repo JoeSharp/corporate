@@ -1,10 +1,12 @@
 package com.ratracejoe.timesheet_service.controller;
 
 import com.ratracejoe.timesheet_service.entity.Project;
+import com.ratracejoe.timesheet_service.util.MockKeycloak;
 import com.ratracejoe.timesheet_service.util.ProjectUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +20,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ProjectControllerTest {
+
+    @RegisterExtension
+    public MockKeycloak mockKeycloak = new MockKeycloak();
 
     @Value(value="${local.server.port}")
     private int port;
@@ -40,7 +45,7 @@ class ProjectControllerTest {
 
     @Test
     public void greetingShouldReturnDefaultMessage() throws Exception {
-        var response = restTemplate.exchange("/project/hello/Joe",
+        var response = restTemplate. exchange("/project/hello/Joe",
                 HttpMethod.GET,
                 new HttpEntity<>(null, new HttpHeaders()),
                 String.class);

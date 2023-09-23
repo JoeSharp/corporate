@@ -1,3 +1,11 @@
 spring:
   datasource:
     url: jdbc:tc:mysql:5.7.34:///timesheets
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri:  http://localhost:8081/realms/ratracejoe
+
+cors:
+  origin: http://localhost:5173/
