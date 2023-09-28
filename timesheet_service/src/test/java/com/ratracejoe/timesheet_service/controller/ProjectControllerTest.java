@@ -47,7 +47,7 @@ class ProjectControllerTest {
     public void greetingShouldReturnDefaultMessage() throws Exception {
         var response = restTemplate. exchange("/project/hello/Joe",
                 HttpMethod.GET,
-                new HttpEntity<>(null, new HttpHeaders()),
+                new HttpEntity<>(null, mockKeycloak.authorizedHeaders()),
                 String.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -60,7 +60,7 @@ class ProjectControllerTest {
         var response =
                 restTemplate.exchange("/project/",
                 HttpMethod.GET,
-                new HttpEntity<>(null, new HttpHeaders()),
+                new HttpEntity<>(null, mockKeycloak.authorizedHeaders()),
                 new ParameterizedTypeReference<List<Project>>() {
                 });
 
