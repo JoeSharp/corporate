@@ -4,7 +4,6 @@ import com.ratracejoe.timesheet_service.entity.Project;
 import com.ratracejoe.timesheet_service.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 
 import java.util.UUID;
 import java.util.stream.IntStream;

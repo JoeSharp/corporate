@@ -6,11 +6,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 class ProjectControllerTest extends AbstractTest {
@@ -24,7 +27,6 @@ class ProjectControllerTest extends AbstractTest {
     public void afterEach() {
         utils.clearProjects();
     }
-
 
     @Test
     public void greetingShouldReturnDefaultMessage() throws Exception {
@@ -42,10 +44,10 @@ class ProjectControllerTest extends AbstractTest {
     public void getProjects() throws Exception {
         var response =
                 restTemplate.exchange("/project/",
-                HttpMethod.GET,
-                new HttpEntity<>(null, authorizedHeaders(restTemplate)),
-                new ParameterizedTypeReference<List<Project>>() {
-                });
+                        HttpMethod.GET,
+                        new HttpEntity<>(null, authorizedHeaders(restTemplate)),
+                        new ParameterizedTypeReference<List<Project>>() {
+                        });
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());

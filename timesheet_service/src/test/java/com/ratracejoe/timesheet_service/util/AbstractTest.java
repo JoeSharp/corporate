@@ -18,9 +18,15 @@ import java.net.URI;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AbstractTest {
+    static KeycloakContainer keycloak;
+
+    static {
+        keycloak = new KeycloakContainer().withRealmImportFile("keycloak/realm-export.json");
+        keycloak.start();
+    }
+
     @Autowired
     protected TestRestTemplate restTemplate;
-
     @Autowired
     protected ProjectUtils utils;
 
@@ -29,12 +35,6 @@ public class AbstractTest {
         registry.add(
                 "spring.security.oauth2.resourceserver.jwt.issuer-uri",
                 () -> keycloak.getAuthServerUrl() + "/realms/ratracejoe");
-    }
-
-    static KeycloakContainer keycloak;
-    static {
-        keycloak = new KeycloakContainer().withRealmImportFile("keycloak/realm-export.json");
-        keycloak.start();
     }
 
     protected static HttpHeaders authorizedHeaders(TestRestTemplate restTemplate) {
