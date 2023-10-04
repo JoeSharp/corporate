@@ -42,7 +42,7 @@ public class AbstractTest {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("grant_type", "password");
         formData.add("client_id", "timesheets-service");
-        formData.add("username", "joe.sharp@ratracejoe.co.uk");
+        formData.add("username", "joesharp");
         formData.add("password", "s3cr3t");
         formData.add("client_secret", "rX0uyWb89PxdeclkQoLMtmRtCLRxFlKy");
 

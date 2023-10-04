@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "943c0b4a-0056-4f95-b192-e85e9ac930ba",
+		"name": "Timesheet Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3038073"
+	},
+	"item": [
+		{
+			"name": "Keycloak",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.environment.set('accessToken', jsonData.access_token)",
+									"pm.environment.set('refreshToken', jsonData.refresh_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "timesheets-service",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "joesharp",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "s3cr3t",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "rX0uyWb89PxdeclkQoLMtmRtCLRxFlKy",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{keycloak-host}}/realms/ratracejoe/protocol/openid-connect/token",
+							"host": [
+								"{{keycloak-host}}"
+							],
+							"path": [
+								"realms",
+								"ratracejoe",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.environment.set('accessToken', jsonData.access_token)",
+									"pm.environment.set('refreshToken', jsonData.refresh_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "timesheets-service",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "Nn0Y9aeggbdLtHKRW2gdsHUylWrOsRno",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "{{refreshToken}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{keycloak-host}}/realms/ratracejoe/protocol/openid-connect/token",
+							"host": [
+								"{{keycloak-host}}"
+							],
+							"path": [
+								"realms",
+								"ratracejoe",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Open ID Configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.environment.set('accessToken', jsonData.access_token)",
+									"pm.environment.set('refreshToken', jsonData.refresh_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "timesheets-service",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "ratracejoe",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "quaverrat",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "P1NgUlUlWQFTBlxESzXsk7XKIryQENbY",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{keycloak-host}}/realms/ratracejoe/.well-known/openid-configuration",
+							"host": [
+								"{{keycloak-host}}"
+							],
+							"path": [
+								"realms",
+								"ratracejoe",
+								".well-known",
+								"openid-configuration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Certs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.environment.set('accessToken', jsonData.access_token)",
+									"pm.environment.set('refreshToken', jsonData.refresh_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "timesheets-service",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "ratracejoe",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "quaverrat",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "P1NgUlUlWQFTBlxESzXsk7XKIryQENbY",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{keycloak-host}}/realms/ratracejoe/protocol/openid-connect/certs",
+							"host": [
+								"{{keycloak-host}}"
+							],
+							"path": [
+								"realms",
+								"ratracejoe",
+								"protocol",
+								"openid-connect",
+								"certs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{service-host}}/project/",
+							"host": [
+								"{{service-host}}"
+							],
+							"path": [
+								"project",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All NO AUTH",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "foo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{service-host}}/project/",
+							"host": [
+								"{{service-host}}"
+							],
+							"path": [
+								"project",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{accessToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

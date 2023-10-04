@@ -15,7 +15,7 @@ services:
       POSTGRES_PASSWORD: the-password
 
   auth:
-    image: quay.io/keycloak/keycloak:22.0.3
+    image: quay.io/keycloak/keycloak:22.0
     command: start-dev --import-realm
     ports:
       - "8081:8080"
