@@ -10,7 +10,7 @@ databaseChangeLog:
             columns:
               - column:
                   name:  id
-                  type:  binary(16)
+                  type:  uuid
                   constraints:
                     primaryKey:  true
                     nullable:  false

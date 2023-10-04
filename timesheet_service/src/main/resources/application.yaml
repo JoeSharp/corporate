@@ -3,10 +3,9 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/timesheets
+    url: jdbc:postgresql://${POSTGRESQL_HOST:localhost}:5432/timesheets
     username: tsuser
     password: the-password
-    driver-class-name: com.mysql.cj.jdbc.Driver
   security:
     oauth2:
       resourceserver:

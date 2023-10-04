@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:tc:mysql:5.7.34:///timesheets
+    url: jdbc:tc:postgresql:9.6.8:///timesheets
   security:
     oauth2:
       resourceserver:
