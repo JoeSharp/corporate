@@ -6,4 +6,6 @@ const Project = z.object({
   description: z.string(),
 });
 
+export type IProject = z.infer<typeof Project>;
+
 export default Project;
