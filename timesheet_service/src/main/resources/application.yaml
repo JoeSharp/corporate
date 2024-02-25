@@ -11,6 +11,17 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8081/realms/ratracejoe
+      client:
+        registration:
+          keycloak:
+            client-id: timesheets-service
+            client-secret: rX0uyWb89PxdeclkQoLMtmRtCLRxFlKy
+            scope: openid
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/timesheets-service
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8081/realms/ratracejoe
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 

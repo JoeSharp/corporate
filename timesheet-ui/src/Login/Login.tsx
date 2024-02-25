@@ -1,11 +1,11 @@
 import React from "react";
 
-import useLogin from '../useLogin/';
+import { useLoginContext } from '../useLogin/useLogin';
 
 const Login: React.FC = () => {
   const formRef = React.useRef();
 
-  const {login} = useLogin();
+  const {login} = useLoginContext();
 
   const onSubmit = React.useCallback(e => {
     let formData = new FormData(formRef.current);

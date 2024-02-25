@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { IProject } from "../Project";
+import { useLoginContext} from '../useLogin/useLogin';
 
 interface UseProjects {
   isLoading: boolean;
@@ -8,6 +9,8 @@ interface UseProjects {
 }
 
 function useProjects(): UseProjects {
+  const { accessToken } = useLoginContext();
+
   const {
     isLoading,
     error,
@@ -15,7 +18,11 @@ function useProjects(): UseProjects {
   } = useQuery<IProject[], Error>({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch("http://127.0.0.1:8080/project/").then((res) => res.json()),
+      fetch("http://127.0.0.1:8080/project/", {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      }).then((res) => res.json()),
   });
 
   return {
