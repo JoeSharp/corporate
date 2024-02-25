@@ -16,3 +16,9 @@ spring:
 
 cors:
   origin: http://localhost:5173/
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

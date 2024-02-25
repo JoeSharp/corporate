@@ -1,5 +1,5 @@
 import React from "react";
-import useProjects from "./useProjects";
+import useProjects from "../useProjects";
 
 const ProjectList: React.FC = () => {
   const { isLoading, error, projects } = useProjects();

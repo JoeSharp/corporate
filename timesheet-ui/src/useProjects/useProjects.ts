@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { IProject } from "./Project";
+import { IProject } from "../Project";
 
 interface UseProjects {
   isLoading: boolean;

@@ -53,4 +53,14 @@ class ProjectControllerTest extends AbstractTest {
         assertNotNull(response.getBody());
         assertEquals(5, response.getBody().size());
     }
+
+    @Test
+    public void createProject() throws Exception {
+        var newProject = new Project(null, "LearnVim", "The project to slow me down, then speed me up");
+        var response = restTemplate.exchange("/project/",
+              HttpMethod.POST,
+              new HttpEntity<>(newProject, authorizedHeaders(restTemplate)),
+              Project.class);
+
+    }
 }
