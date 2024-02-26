@@ -1,6 +1,4 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { ILoggedInUser } from '../Project';
 
 interface UseLogin {
   username: string | undefined;
@@ -32,10 +30,15 @@ function useLogin(): UseLogin {
   };
 }
 
-export const LoginContext = React.createContext<UseLogin>(null);
+const DEFAULT_USE_LOGIN: UseLogin = {
+  username: 'none',
+  accessToken: 'none',
+  login: () => { throw new Error('not implemented') }
+}
+export const LoginContext = React.createContext<UseLogin>(DEFAULT_USE_LOGIN);
 export const useLoginContext = () => React.useContext(LoginContext);
 
-export const LoginContextProvider:React.FC<{children: React.JSXElement}> = ({children}) => {
+export const LoginContextProvider:React.FC<{children: React.JSX.Element}> = ({children}) => {
   const value = useLogin();
 
   return <LoginContext.Provider value={value}>

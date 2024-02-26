@@ -1,16 +1,18 @@
-import React from "react";
+import React, { FormEventHandler } from "react";
 
 import { useLoginContext } from '../useLogin/useLogin';
 
 const Login: React.FC = () => {
-  const formRef = React.useRef();
+  const formRef = React.useRef<HTMLFormElement>(null);
 
   const {login} = useLoginContext();
 
-  const onSubmit = React.useCallback(e => {
-    let formData = new FormData(formRef.current);
-    login(formData);
+  const onSubmit: FormEventHandler = React.useCallback((e) => {
     e.preventDefault();
+    if (!formRef.current) return;
+
+    const formData = new FormData(formRef.current);
+    login(formData);
 
   }, [login]);
 

@@ -18,10 +18,10 @@ spring:
             client-secret: rX0uyWb89PxdeclkQoLMtmRtCLRxFlKy
             scope: openid
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/timesheets-service
         provider:
           keycloak:
             issuer-uri: http://localhost:8081/realms/ratracejoe
+            user-name-attribute: preferred_username
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
