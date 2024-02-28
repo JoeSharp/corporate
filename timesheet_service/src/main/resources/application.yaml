@@ -25,9 +25,6 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
-cors:
-  origin: http://localhost:5173/
-
 logging:
   level:
     org:

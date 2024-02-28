@@ -5,6 +5,7 @@ interface UseLogin {
   accessToken: string | undefined;
 
   login: (data: FormData) => void;
+  logout: () => void;
 }
 
 function useLogin(): UseLogin {
@@ -14,7 +15,7 @@ function useLogin(): UseLogin {
   );
 
   const login = React.useCallback((formData: FormData) => {
-      fetch("http://localhost:8080/login", 
+      fetch("/login", 
           { method: 'POST', body: formData} )
         .then((res) => res.json())
         .then(l => {
@@ -22,17 +23,21 @@ function useLogin(): UseLogin {
         setAccessToken(l.accessToken);
         });
   }, []);
+
+  const logout = React.useCallback(() => fetch("/logout"), []);
   
   return {
     username,
     accessToken,
-    login
+    login,
+    logout
   };
 }
 
 const DEFAULT_USE_LOGIN: UseLogin = {
   username: 'none',
   accessToken: 'none',
+  logout: () => { throw new Error('not implemented') },
   login: () => { throw new Error('not implemented') }
 }
 export const LoginContext = React.createContext<UseLogin>(DEFAULT_USE_LOGIN);

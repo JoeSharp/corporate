@@ -33,8 +33,6 @@ public class SecurityConfig {
     private static final String GROUPS = "groups";
     private static final String REALM_ACCESS_CLAIM = "realm_access";
     private static final String ROLES_CLAIM = "roles";
-    @Value("${cors.origin}")
-    private String corsOrigin;
 
     private final KeycloakLogoutHandler keycloakLogoutHandler;
 
@@ -68,16 +66,6 @@ public class SecurityConfig {
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of(corsOrigin));
-        configuration.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
-    @Bean
     public GrantedAuthoritiesMapper userAuthoritiesMapperForKeycloak() {
         return authorities -> {
             Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
@@ -95,7 +83,7 @@ public class SecurityConfig {
                     var roles = (Collection<String>) realmAccess.get(ROLES_CLAIM);
                     mappedAuthorities.addAll(generateAuthoritiesFromClaim(roles));
                 } else if (userInfo.hasClaim(GROUPS)) {
-                    Collection<String> roles = (Collection<String>) userInfo.getClaim(
+                    Collection<String> roles = userInfo.getClaim(
                             GROUPS);
                     mappedAuthorities.addAll(generateAuthoritiesFromClaim(roles));
                 }

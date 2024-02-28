@@ -4,7 +4,7 @@ import { useLoginContext} from '../useLogin/useLogin';
 
 interface UseProjects {
   isLoading: boolean;
-  error: any;
+  error: Error | null;
   projects: IProject[];
 }
 
@@ -18,7 +18,7 @@ function useProjects(): UseProjects {
   } = useQuery<IProject[], Error>({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch("http://127.0.0.1:8080/project/", {
+      fetch("/project/", {
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }
