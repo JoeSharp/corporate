@@ -1,44 +1,32 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 
 interface UseLogin {
   username: string | undefined;
-  accessToken: string | undefined;
 
-  login: (data: FormData) => void;
   logout: () => void;
 }
 
 function useLogin(): UseLogin {
-  const [username, setUsername] = React.useState<string | undefined>(undefined);
-  const [accessToken, setAccessToken] = React.useState<string | undefined>(
-    undefined
-  );
 
-  const login = React.useCallback((formData: FormData) => {
-      fetch("/login", 
-          { method: 'POST', body: formData} )
-        .then((res) => res.json())
-        .then(l => {
-          setUsername(l.username);
-        setAccessToken(l.accessToken);
-        });
-  }, []);
+  const {
+    data: username = 'Anonymous',
+  } = useQuery<string, Error>({
+    queryFn: () =>
+      fetch("/auth/getUser").then((res) => res.text()),
+  });
 
-  const logout = React.useCallback(() => fetch("/logout"), []);
+  const logout = React.useCallback(() => fetch("/auth/logout"), []);
   
   return {
     username,
-    accessToken,
-    login,
     logout
   };
 }
 
 const DEFAULT_USE_LOGIN: UseLogin = {
   username: 'none',
-  accessToken: 'none',
   logout: () => { throw new Error('not implemented') },
-  login: () => { throw new Error('not implemented') }
 }
 export const LoginContext = React.createContext<UseLogin>(DEFAULT_USE_LOGIN);
 export const useLoginContext = () => React.useContext(LoginContext);
