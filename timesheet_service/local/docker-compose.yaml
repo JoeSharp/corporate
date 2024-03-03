@@ -13,6 +13,11 @@ services:
       POSTGRES_DB: timesheets
       POSTGRES_USER: tsuser
       POSTGRES_PASSWORD: the-password
+    healthcheck:
+      test: pg_isready -U tsuser -d timesheets
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
   auth:
     image: quay.io/keycloak/keycloak:22.0
@@ -22,5 +27,12 @@ services:
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin-pw
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://db:5432/timesheets
+      KC_DB_USERNAME: tsuser
+      KC_DB_PASSWORD: the-password
+    depends_on:
+      db:
+        condition: service_healthy
     volumes:
       - ./auth/realm-export.json:/opt/keycloak/data/import/main-realm.json:ro
