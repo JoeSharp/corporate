@@ -5,7 +5,7 @@ spring:
   datasource:
     url: jdbc:postgresql://${POSTGRESQL_HOST:localhost}:5432/timesheets
     username: tsuser
-    password: the-password
+    password: ts-password
   security:
     oauth2:
       resourceserver:
