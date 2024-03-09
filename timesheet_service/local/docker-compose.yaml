@@ -2,6 +2,16 @@
 version: '3.1'
 
 services:
+  app:
+    image: joesharpcs/timesheet_service:latest
+    ports:
+      - "8082:8080"
+    environment:
+      DB_URL: jdbc:postgresql://app-db:5432/timesheets
+      OAUTH2_URL: http://auth:8080/realms/ratracejoe
+    depends_on:
+      app-db:
+        condition: service_healthy
 
   app-db:
     image: postgres
@@ -39,7 +49,7 @@ services:
     image: quay.io/keycloak/keycloak:22.0
     command: start-dev --import-realm
     ports:
-      - "8081:8080"
+      - "8080:8080"
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin-pw

@@ -4,6 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.3'
 	id 'jacoco'
 	id "org.sonarqube" version "4.4.1.3373"
+	id 'com.bmuschko.docker-remote-api' version '9.4.0'
 }
 
 group = 'com.ratracejoe'
@@ -15,6 +16,14 @@ java {
 
 repositories {
 	mavenCentral()
+}
+// Import task types
+import com.bmuschko.gradle.docker.tasks.image.*
+
+// Use task types
+task buildAppImage(type: DockerBuildImage) {
+	inputDir = projectDir
+	images.add('joesharpcs/timesheet_service:latest')
 }
 
 dependencies {
